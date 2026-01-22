@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__web-reader__webReader",
+      "mcp__zai-mcp-server__analyze_video",
+      "mcp__zai-mcp-server__analyze_image"
+    ]
+  },
+  "env": {
+    "CLAUDEKIT_PATH": "./kits/default"
+  }
+}

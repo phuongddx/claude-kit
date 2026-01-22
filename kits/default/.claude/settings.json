@@ -1,0 +1,30 @@
+{
+  "commands": {
+    "setup": [],
+    "pre-commit": [],
+    "post-commit": []
+  },
+  "hooks": {
+    "pre-commit": [
+      {
+        "type": "exec",
+        "command": "npm run lint"
+      },
+      {
+        "type": "exec",
+        "command": "npm run test"
+      }
+    ],
+    "post-commit": [
+      {
+        "type": "exec",
+        "command": "npm run build"
+      }
+    ]
+  },
+  "preferences": {
+    "defaultBranch": "main",
+    "commitType": "conventional",
+    "testFramework": "auto-detect"
+  }
+}
