@@ -479,11 +479,16 @@ Contributions are welcome! The project is organized into phases:
 
 | Phase | Component | Status |
 |-------|-----------|--------|
-| 1 | CLI Tool (`ck`) | Planned |
-| 2 | AI Agents (5) | Planned |
-| 3 | Commands (8) | Planned |
-| 4 | Skills (11) | iOS skill created |
-| 5 | Workflows & Config | Planned |
+| 1 | CLI Tool (`ck`) | Implemented |
+| 2 | AI Agents (5) | Implemented |
+| 3 | Commands (8) | Implemented |
+| 4 | Skills (11) | Implemented |
+| 5 | Workflows & Config | Implemented |
+
+**Planned additions:**
+- 12 more agents (code-reviewer, git-manager, scout, etc.)
+- 58 more commands (fix:*, design:*, content:*, docs:*, etc.)
+- 39 more skills (ui-styling, threejs, devops, mcp-builder, etc.)
 
 ## License
 
