@@ -1,0 +1,25 @@
+{
+  "name": "claudekit-cli",
+  "version": "1.0.0",
+  "description": "ClaudeKit CLI Tool",
+  "type": "module",
+  "bin": {
+    "ck": "./bin/ck.ts"
+  },
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir ./dist",
+    "start": "node dist/index.js",
+    "lint": "bunx tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "cac": "^6.7.14",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  }
+}
