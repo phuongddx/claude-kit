@@ -1,5 +1,6 @@
 import { copyKitFiles } from './file-copier.js';
-import { writeMetadata } from '../config/index.js';
+import { writeMetadata, validateSettingsJson } from '../config/index.js';
+import { logger } from '../../shared/logger.js';
 import { KitMetadata } from '../../types/index.js';
 import { CLI_VERSION } from '../../shared/constants.js';
 
@@ -13,6 +14,17 @@ export function installKit(
 ): KitMetadata {
   // Copy kit files
   copyKitFiles(kitPath, targetPath, kitSubdir);
+
+  // Validate settings.json
+  const validation = validateSettingsJson(targetPath);
+  if (!validation.valid) {
+    logger.warn(`Invalid settings.json in kit template:`);
+    for (const error of validation.errors) {
+      logger.warn(`  - ${error}`);
+    }
+  } else {
+    logger.success('settings.json validated successfully');
+  }
 
   // Create metadata
   const metadata: KitMetadata = {
