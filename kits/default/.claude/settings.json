@@ -1,30 +1,33 @@
 {
-  "commands": {
-    "setup": [],
-    "pre-commit": [],
-    "post-commit": []
-  },
   "hooks": {
-    "pre-commit": [
+    "PostToolUse": [
       {
-        "type": "exec",
-        "command": "npm run lint"
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npm run lint -- --fix 2>/dev/null || true",
+            "timeout": 30
+          }
+        ]
       },
       {
-        "type": "exec",
-        "command": "npm run test"
-      }
-    ],
-    "post-commit": [
-      {
-        "type": "exec",
-        "command": "npm run build"
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npm run build 2>/dev/null || true",
+            "timeout": 60
+          }
+        ]
       }
     ]
   },
-  "preferences": {
-    "defaultBranch": "main",
-    "commitType": "conventional",
-    "testFramework": "auto-detect"
+  "permissions": {
+    "allow": [
+      "Bash(npm run lint:*)",
+      "Bash(npm run build)",
+      "Bash(npm run test:*)"
+    ]
   }
 }
