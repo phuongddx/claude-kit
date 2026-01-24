@@ -6,7 +6,18 @@ import { DEFAULT_KIT_PATH, KIT_PATH_ENV_VAR } from '../shared/constants.js';
  */
 function getCliDir(): string {
   const cliPath = new URL(import.meta.url).pathname;
-  return path.dirname(path.dirname(cliPath));
+  // This file is in cli/src/services/path-resolver.ts
+  // Go up to cli/ directory: services -> src -> cli
+  return path.dirname(path.dirname(path.dirname(cliPath)));
+}
+
+/**
+ * Get the project root directory (parent of CLI directory)
+ */
+export function resolveProjectRoot(): string {
+  const cliDir = getCliDir();
+  // From cli/ go up to project root
+  return path.resolve(cliDir, '..');
 }
 
 /**
@@ -26,8 +37,8 @@ export function resolveKitPath(cwd: string = process.cwd()): string {
   }
   // Resolve relative to CLI installation, not user's CWD
   const cliDir = getCliDir();
-  // Go up to parent directory of cli/ (the project root), then to kits/default
-  return path.resolve(cliDir, '..', '..', DEFAULT_KIT_PATH);
+  // From cli/ go up to project root (parent of cli), then to kits/default
+  return path.resolve(cliDir, '..', 'kits', 'default');
 }
 
 /**

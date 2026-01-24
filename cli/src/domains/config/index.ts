@@ -3,7 +3,7 @@ import path from 'node:path';
 import { z } from 'zod';
 import { KitMetadata } from '../../types/index.js';
 import { kitMetadataSchema, settingsSchema } from './schema.js';
-import { METADATA_FILE, CLAUDE_DIR } from '../../shared/constants.js';
+import { METADATA_FILE, CLAUDE_DIR, CLI_VERSION } from '../../shared/constants.js';
 
 /** Validation result */
 export interface ValidationResult {
@@ -46,6 +46,22 @@ export function writeMetadata(projectPath: string, metadata: KitMetadata): void 
  */
 export function isProjectInitialized(projectPath: string): boolean {
   return readMetadata(projectPath) !== null;
+}
+
+/**
+ * Update kit metadata with current CLI version and timestamp
+ */
+export function updateMetadata(projectPath: string): KitMetadata | null {
+  const metadata = readMetadata(projectPath);
+  if (!metadata) {
+    return null;
+  }
+
+  metadata.cliVersion = CLI_VERSION;
+  metadata.initializedAt = new Date().toISOString();
+  writeMetadata(projectPath, metadata);
+
+  return metadata;
 }
 
 /**

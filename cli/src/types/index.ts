@@ -26,3 +26,8 @@ export interface InitOptions {
 export interface NewOptions {
   force?: boolean;
 }
+
+/** Update command options */
+export interface UpdateOptions {
+  force?: boolean;
+}
