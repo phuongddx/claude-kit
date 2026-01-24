@@ -1,6 +1,6 @@
 ---
 title: Test Command
-description: Run test suite and analyze coverage
+description: 👉👉👉 - Run test suite and analyze coverage
 agent: tester
 argument-hint: 👉👉👉 [optional test file path]
 ---

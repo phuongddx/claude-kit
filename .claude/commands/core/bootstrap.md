@@ -1,6 +1,6 @@
 ---
 title: Bootstrap Command
-description: Initialize a new project from scratch
+description: 👉👉👉 - Initialize a new project from scratch
 agent: fullstack-developer
 argument-hint: 👉👉👉 [project description]
 ---

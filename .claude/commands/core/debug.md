@@ -1,6 +1,6 @@
 ---
 title: Debug Command
-description: Investigate and diagnose issues
+description: 👉👉👉 - Investigate and diagnose issues
 agent: debugger
 argument-hint: 👉👉👉 [issue description or error log]
 ---

@@ -91,7 +91,7 @@ export const kitMetadataSchema = z.object({
   cliVersion: z.string(),
   kitPath: z.string(),
   initializedAt: z.string()
-});
+}).passthrough();
 
 /** Kit manifest schema */
 export const kitManifestSchema = z.object({

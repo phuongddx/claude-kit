@@ -1,6 +1,6 @@
 ---
 title: Git Commit Command
-description: Stage and commit with conventional commits
+description: 👉👉👉 - Stage and commit with conventional commits
 agent: git-manager
 argument-hint: 👉👉👉
 ---

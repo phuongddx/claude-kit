@@ -1,6 +1,6 @@
 ---
 title: Fix Fast Command
-description: Quick fixes for simple bugs
+description: 👉👉👉 - Quick fixes for simple bugs
 agent: debugger, fullstack-developer
 argument-hint: 👉👉👉 [bug description]
 ---
