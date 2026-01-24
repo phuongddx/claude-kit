@@ -11,7 +11,7 @@ Create professional git commits.
 
 ## Usage
 ```
-/git:cm
+/git:commit
 ```
 
 ## Your Process
