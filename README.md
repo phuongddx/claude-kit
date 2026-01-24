@@ -65,6 +65,26 @@ ck init .
 
 Adds ClaudeKit to your current project without modifying existing files.
 
+### `ck update [path]`
+
+Update an existing project with the latest kit files from ClaudeKit.
+
+```bash
+ck update .
+```
+
+Preserves your local customizations while updating:
+- Command definitions
+- Agent configurations
+- Skill files
+- Workflow templates
+
+The update process:
+1. Scans current `.claude/` directory
+2. Compares with latest kit files
+3. Syncs new/updated files (preserving local customizations)
+4. Updates metadata.json with new version
+
 ### `ck --version`
 
 Display the current version of ClaudeKit CLI.
