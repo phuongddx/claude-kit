@@ -2,6 +2,7 @@
 title: Cook Command
 description: Implement features from plans or descriptions
 agent: fullstack-developer
+argument-hint: 👉👉👉 [feature description or path/to/plan.md]
 ---
 
 # Cook Command

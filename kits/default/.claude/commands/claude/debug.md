@@ -2,7 +2,7 @@
 title: Claude Debug Command
 description: Debug issues with systematic investigation
 agent: debugger
-argument-hint: [issue description or error log]
+argument-hint: 👉👉👉 [issue description or error log]
 allowed-tools:
   - Read
   - Grep

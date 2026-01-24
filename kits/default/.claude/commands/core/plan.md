@@ -2,6 +2,7 @@
 title: Plan Command
 description: Create detailed implementation plans
 agent: planner
+argument-hint: 👉👉👉 [feature description]
 ---
 
 # Plan Command
