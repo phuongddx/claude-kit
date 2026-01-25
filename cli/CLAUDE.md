@@ -1,111 +1,126 @@
----
-description: Use Bun instead of Node.js, npm, pnpm, or vite.
-globs: "*.ts, *.tsx, *.html, *.css, *.js, *.jsx, package.json"
-alwaysApply: false
----
+# CLAUDE.md
 
-Default to using Bun instead of Node.js.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-- Use `bun <file>` instead of `node <file>` or `ts-node <file>`
-- Use `bun test` instead of `jest` or `vitest`
-- Use `bun build <file.html|file.ts|file.css>` instead of `webpack` or `esbuild`
-- Use `bun install` instead of `npm install` or `yarn install` or `pnpm install`
-- Use `bun run <script>` instead of `npm run <script>` or `yarn run <script>` or `pnpm run <script>`
-- Use `bunx <package> <command>` instead of `npx <package> <command>`
-- Bun automatically loads .env, so don't use dotenv.
+## Project Overview
 
-## APIs
+ClaudeKit CLI is a Bun-based TypeScript CLI tool that manages `.claude/` kit installations for projects. This is the **CLI component** of the larger ClaudeKit project.
 
-- `Bun.serve()` supports WebSockets, HTTPS, and routes. Don't use `express`.
-- `bun:sqlite` for SQLite. Don't use `better-sqlite3`.
-- `Bun.redis` for Redis. Don't use `ioredis`.
-- `Bun.sql` for Postgres. Don't use `pg` or `postgres.js`.
-- `WebSocket` is built-in. Don't use `ws`.
-- Prefer `Bun.file` over `node:fs`'s readFile/writeFile
-- Bun.$`ls` instead of execa.
+## Development Commands
+
+```bash
+# In /cli directory
+bun install              # Install dependencies
+bun run dev              # Run CLI directly (src/index.ts)
+bun run build            # Build to ./dist
+bun run start            # Run built version
+bun run lint             # TypeScript type check (tsc --noEmit)
+bun test                 # Run tests
+
+# Global linking (enables 'ck' command everywhere)
+bun link
+
+# Using the CLI
+ck --version
+ck [path]                # Initialize existing project (alias: ck init)
+ck new [name]            # Create new project with git init
+ck update [path]         # Update with latest kit files
+ck git:commit [path]     # Stage and commit changes (alias: git:cm)
+ck git:push [path]       # Commit and push to remote (alias: git:cp)
+ck git:pr [path]         # Create GitHub pull request
+```
+
+## High-Level Architecture
+
+```
+cli/
+├── bin/ck.ts                 # Shebang entry point
+├── src/
+│   ├── cli/                  # CAC command registration (cli-config.ts)
+│   ├── commands/             # Command implementations
+│   ├── domains/              # Business logic modules
+│   ├── services/             # Shared utilities
+│   ├── shared/               # Constants, logger, git utilities
+│   └── types/                # TypeScript types
+├── test/                     # Bun test files
+└── .claude/agents/           # CLI-specific AI agents
+```
+
+### Domain-Driven Architecture
+
+The `/domains/` directory isolates business logic:
+- `installation/` - Kit file copying logic
+- `config/` - Metadata/settings.json management with Zod validation
+- `updater/` - File syncing with preservation logic
+
+### Path Resolution Pattern
+
+Critical function: `resolveKitPath()` in `src/services/path-resolver.ts`
+
+Kit location priority:
+1. `CLAUDEKIT_PATH` environment variable (absolute or relative to CWD)
+2. Default: `../../kits/default` (relative to CLI installation)
+
+The function uses `getCliDir()` which derives the CLI location from `import.meta.url`, then navigates up to find the project root and kit directory.
+
+### Command Metadata Discovery
+
+The CLI reads command descriptions from `.md` files' YAML frontmatter via `src/services/command-metadata.ts`:
+
+- Searches both project `.claude/` and kit template directories
+- Parses frontmatter for: `title`, `description`, `agent`, `argumentHint`
+- Formats descriptions with argument hints (👉👉👉 emoji)
+
+### File Preservation Pattern
+
+During updates, these files are never overwritten:
+- `metadata.json` - Project installation metadata
+- `settings.local.json` - Local configuration overrides
+
+### Git Safety Patterns
+
+Git commands (`src/shared/git.ts`, `src/commands/git-*.ts`) enforce:
+- **Blocked patterns**: `.env`, secrets, `.pem`, `.key`, credentials
+- **Protected branches**: main, master, release, production (require confirmation)
+- **Force push**: uses `--force-with-lease`, requires explicit confirmation
+- **Conventional commits**: type/scope format with interactive generation
+
+## TypeScript Configuration
+
+- Target: ESNext with bundler module resolution
+- Strict mode enabled
+- ES Modules with `.js` extensions required in imports
+- Use `node:` prefix for Node.js built-ins
 
 ## Testing
 
-Use `bun test` to run tests.
+Tests mirror source structure in `/test/`:
+- `config.test.ts` - Metadata read/write/validate
+- `path-resolver.test.ts` - Path resolution
+- `scanner.test.ts` - File/directory existence checks
+- `version.test.ts` - Version constants
 
-```ts#index.test.ts
-import { test, expect } from "bun:test";
+## Environment Variables
 
-test("hello world", () => {
-  expect(1).toBe(1);
-});
-```
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `CLAUDEKIT_PATH` | Override kit directory location | `./kits/default` (relative to project root) |
 
-## Frontend
+## CLI-Specific Agents
 
-Use HTML imports with `Bun.serve()`. Don't use `vite`. HTML imports fully support React, CSS, Tailwind.
+The `.claude/agents/` directory contains agent definitions for this CLI:
+- `git-manager.md` - Git workflow automation (commit/push/PR)
+- `debugger.md` - Root cause analysis
+- `planner.md` - Implementation planning
+- `researcher.md` - Research tasks
+- `tester.md` - Testing framework detection
+- iOS-specific agents: `ios-developer.md`, `ios-tester.md`, `ios-debugger.md`
 
-Server:
+These are separate from kit template agents.
 
-```ts#index.ts
-import index from "./index.html"
+## Dependencies
 
-Bun.serve({
-  routes: {
-    "/": index,
-    "/api/users/:id": {
-      GET: (req) => {
-        return new Response(JSON.stringify({ id: req.params.id }));
-      },
-    },
-  },
-  // optional websocket support
-  websocket: {
-    open: (ws) => {
-      ws.send("Hello, world!");
-    },
-    message: (ws, message) => {
-      ws.send(message);
-    },
-    close: (ws) => {
-      // handle close
-    }
-  },
-  development: {
-    hmr: true,
-    console: true,
-  }
-})
-```
-
-HTML files can import .tsx, .jsx or .js files directly and Bun's bundler will transpile & bundle automatically. `<link>` tags can point to stylesheets and Bun's CSS bundler will bundle.
-
-```html#index.html
-<html>
-  <body>
-    <h1>Hello, world!</h1>
-    <script type="module" src="./frontend.tsx"></script>
-  </body>
-</html>
-```
-
-With the following `frontend.tsx`:
-
-```tsx#frontend.tsx
-import React from "react";
-import { createRoot } from "react-dom/client";
-
-// import .css files directly and it works
-import './index.css';
-
-const root = createRoot(document.body);
-
-export default function Frontend() {
-  return <h1>Hello, world!</h1>;
-}
-
-root.render(<Frontend />);
-```
-
-Then, run index.ts
-
-```sh
-bun --hot ./index.ts
-```
-
-For more information, read the Bun API docs in `node_modules/bun-types/docs/**.mdx`.
+- `cac` - CLI framework
+- `@clack/prompts` - Interactive CLI prompts
+- `zod` - Schema validation
+- Runtime: Bun (no external git library - uses Node.js `child_process`)
