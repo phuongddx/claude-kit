@@ -1,13 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import type { CommandMetadata } from '../types/index.js';
 
-/** Command metadata from frontmatter */
-export interface CommandMetadata {
-  title: string;
-  description: string;
-  agent?: string;
-  argumentHint?: string;
-}
+// Re-export for backward compatibility
+export type { CommandMetadata };
 
 /** Frontmatter parsed result */
 interface FrontmatterResult {
@@ -93,7 +89,11 @@ export function getCommandMetadata(commandPath: string): CommandMetadata | null 
     title: String(data.title || ''),
     description: String(data.description || ''),
     agent: data.agent ? String(data.agent) : undefined,
-    argumentHint: data.argumentHint ? String(data.argumentHint) : undefined
+    argumentHint: data.argumentHint ? String(data.argumentHint) : undefined,
+    category: data.category ? String(data.category) : undefined,
+    aliases: Array.isArray(data.aliases) ? data.aliases.map(String) : undefined,
+    examples: Array.isArray(data.examples) ? data.examples.map(String) : undefined,
+    tags: Array.isArray(data.tags) ? data.tags.map(String) : undefined,
   };
 }
 

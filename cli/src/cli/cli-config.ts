@@ -9,6 +9,28 @@ import { gitCpCommand } from '../commands/git-push.js';
 import { gitPrCommand } from '../commands/git-pr.js';
 import { resolveKitPath, resolveProjectRoot } from '../services/path-resolver.js';
 import { findCommandFile, getCommandMetadata, formatCommandDescription } from '../services/command-metadata.js';
+import { createCommandRegistry, type CommandRegistry } from './command-registry.js';
+
+/**
+ * Command registry instance (lazy loaded).
+ */
+let registry: CommandRegistry | null = null;
+
+/**
+ * Get or create the command registry.
+ */
+function getRegistry(): CommandRegistry {
+  if (!registry) {
+    const kitPath = resolveKitPath();
+    const projectRoot = resolveProjectRoot();
+
+    registry = createCommandRegistry({
+      kitPath,
+      projectRoot: projectRoot || undefined,
+    });
+  }
+  return registry;
+}
 
 /**
  * Get command description with argument hint
@@ -30,6 +52,53 @@ function getCommandDescription(commandName: string, defaultDescription: string):
   }
 
   return defaultDescription;
+}
+
+/**
+ * Discover and register dynamic commands.
+ * This is called before CLI parsing to add commands from the kit.
+ */
+function registerDynamicCommands(cli: any): void {
+  try {
+    const registry = getRegistry();
+    const commands = registry.discoverCommands();
+
+    // Only register non-core commands (core commands are manually registered)
+    const coreCommandNames = ['init', 'new', 'update'];
+
+    for (const command of commands) {
+      // Skip core commands (already manually registered)
+      if (coreCommandNames.includes(command.commandName)) {
+        continue;
+      }
+
+      // Build command syntax
+      const syntax = command.syntax;
+      const description = formatCommandDescription(command.metadata);
+
+      // Register the command
+      cli.command(syntax, description)
+        .action(async (...args: unknown[]) => {
+          // For now, just show that the command is discovered
+          console.log(`Command discovered: ${command.commandName}`);
+          console.log(`Category: ${command.category}`);
+          console.log(`Agent: ${command.metadata.agent || 'none'}`);
+          console.log('\nThis command is defined in the kit but not yet implemented in the CLI.');
+          console.log(`File: ${command.path}`);
+        });
+
+      // Register aliases
+      for (const alias of command.aliases) {
+        cli.command(alias, description)
+          .action(async (...args: unknown[]) => {
+            console.log(`Alias for: ${command.commandName}`);
+          });
+      }
+    }
+  } catch (error) {
+    // Silently fail - dynamic commands are optional
+    console.debug('Failed to discover dynamic commands:', error);
+  }
 }
 
 /**
@@ -57,8 +126,11 @@ export function createCli() {
 
   // Update command
   cli.command('update [path]', getCommandDescription('update', 'Update existing project with latest kit files'))
-    .action(async (path: string = '.') => {
-      await updateCommand(path);
+    .option('-f, --force', 'Force overwrite preserved files')
+    .option('--dry-run', 'Preview changes without applying them')
+    .option('--no-backup', 'Skip creating backup before update')
+    .action(async (path: string = '.', options: { force?: boolean; dryRun?: boolean; backup?: boolean }) => {
+      await updateCommand(path, { force: options.force, dryRun: options.dryRun, backup: options.backup });
     });
 
   // Git commit command
@@ -90,6 +162,9 @@ export function createCli() {
     .action(async (path: string = '.', options: { base?: string; draft?: boolean; title?: string }) => {
       await gitPrCommand(path, options);
     });
+
+  // Register dynamic commands from kit
+  registerDynamicCommands(cli);
 
   // Help as fallback
   cli.help();

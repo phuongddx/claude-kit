@@ -86,11 +86,32 @@ export const settingsSchema = z.object({
   terminalProgressBarEnabled: z.boolean().optional()
 }).passthrough();
 
-/** Kit metadata schema */
+/** File version schema */
+const fileVersionSchema = z.object({
+  path: z.string(),
+  hash: z.string(),
+  version: z.string(),
+  modifiedAt: z.string()
+});
+
+/** Update history entry schema */
+const updateHistoryEntrySchema = z.object({
+  timestamp: z.string(),
+  fromVersion: z.string(),
+  toVersion: z.string(),
+  filesChanged: z.number(),
+  backupId: z.string().optional()
+});
+
+/** Kit metadata schema (enhanced with version tracking) */
 export const kitMetadataSchema = z.object({
   cliVersion: z.string(),
+  kitVersion: z.string().optional(),
   kitPath: z.string(),
-  initializedAt: z.string()
+  initializedAt: z.string(),
+  lastUpdatedAt: z.string().optional(),
+  updateHistory: z.array(updateHistoryEntrySchema).optional(),
+  fileVersions: z.record(z.string(), fileVersionSchema).optional()
 }).passthrough();
 
 /** Kit manifest schema */
