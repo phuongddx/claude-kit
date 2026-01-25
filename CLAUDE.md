@@ -64,7 +64,9 @@ bun run lint            # TypeScript check (tsc --noEmit)
 bun link
 
 # Tests
-bun test
+bun test                # Run all tests (52 tests passing)
+bun test unit           # Unit tests only
+bun test integration    # Integration tests only
 ```
 
 ### Using the CLI
@@ -96,7 +98,21 @@ ck new [name] --force   # Force overwrite
 |--------|------|---------|
 | installation | `src/domains/installation/index.ts` | Copy kit files to target |
 | config | `src/domains/config/index.ts` | Read/write metadata.json |
-| versioning | `src/domains/versioning/` | Version management |
+| updater | `src/domains/updater/` | Update mechanism with version tracking |
+| versioning | `src/domains/versioning/` | Version tracking, rollback, history |
+
+### Core Services
+
+| Service | File | Purpose |
+|---------|------|---------|
+| Agent Registry | `src/services/agent-registry.ts` | Discover and manage agents |
+| Agent Coordinator | `src/services/agent-coordinator.ts` | Orchestrate multi-agent workflows |
+| Skill Indexer | `src/services/skill-indexer.ts` | Discover all available skills |
+| Skill Activator | `src/services/skill-activator.ts` | Context-aware skill loading |
+| Command Registry | `src/cli/command-registry.ts` | Dynamic command discovery |
+| Command Metadata | `src/services/command-metadata.ts` | Read command frontmatter |
+| Merge Resolver | `src/services/merge-resolver.ts` | Three-way merge conflict resolution |
+| Preserve List | `src/domains/updater/preserve-list.ts` | Pattern-based file preservation |
 
 ### File Operations
 
@@ -104,11 +120,21 @@ ck new [name] --force   # Force overwrite
 - `src/services/file-operations/manifest.ts` - File hashing for manifests
 - `src/services/path-resolver.ts` - Resolve `CLAUDEKIT_PATH`
 
+### Error Handling
+
+- `src/errors/base.ts` - Structured error base classes
+- `src/errors/codes.ts` - Error code definitions
+- `src/errors/handlers.ts` - Error handlers with suggestions
+
 ### Types
 
 Core types in `src/types/index.ts`:
-- `KitMetadata` - Project metadata (cliVersion, kitPath, initializedAt)
+- `KitMetadata` - Project metadata (cliVersion, kitPath, initializedAt, updateHistory)
 - `ManifestEntry` - File path, size, hash
+- `PreserveRule` - File preservation rules (exact, glob, directory)
+- `MergeConflict` - Merge conflict detection and resolution
+- `AgentDefinition` - Agent metadata and capabilities
+- `SkillDefinition` - Skill metadata and dependencies
 - `InitOptions`, `NewOptions` - Command options
 
 ## Kit Template Structure
@@ -168,9 +194,34 @@ Multi-agent orchestration patterns.
 
 ### Configuration Files
 
-- `metadata.json` - Kit version, installation tracking
+- `metadata.json` - Kit version, installation tracking, update history
 - `settings.json` - Hooks, preferences
 - `settings.local.json` - Local overrides (gitignored)
+
+## Update Mechanism
+
+ClaudeKit supports updating existing projects with new kit files while preserving local customizations.
+
+### Update Features
+
+- **Version Tracking** - SHA256 file hashing for change detection
+- **Rollback** - Automatic backups before updates with one-step rollback
+- **Three-Way Merge** - Intelligent conflict resolution between kit, local, and base versions
+- **Dry-Run Mode** - Preview changes before applying them
+- **Preserve Rules** - Pattern-based file protection (exact, glob, directory)
+
+### Update Process
+
+```bash
+# Preview update (dry-run)
+ck update . --dry-run
+
+# Apply update
+ck update .
+
+# Rollback if needed
+ck update . --rollback
+```
 
 ## TypeScript Configuration
 
@@ -194,15 +245,52 @@ Multi-agent orchestration patterns.
 | Phase | Component | Status |
 |-------|-----------|--------|
 | 1 | CLI Tool | Implemented |
-| 2 | Agents | Partially (5 core + 3 iOS) |
-| 3 | Commands | Partially (8 core) |
-| 4 | Skills | Partially (11 core) |
-| 5 | Workflows/Config | Partially (3 workflows + config) |
+| 2 | Agents | Implemented (9 core + 3 iOS) |
+| 3 | Commands | Implemented (15 core) |
+| 4 | Skills | Implemented (11 core) |
+| 5 | Workflows/Config | Implemented (3 workflows + config) |
 
-Planned additions:
-- 12 more agents (code-reviewer, git-manager, scout, etc.)
-- 58 more commands (fix:*, design:*, content:*, docs:*)
-- 39 more skills (ui-styling, threejs, devops, mcp-builder, etc.)
+### Implemented Agents
+
+**Core agents (in kits/default/.claude/agents/):**
+- planner - Spawns researchers, creates implementation plans
+- fullstack-developer - Executes plans, writes code/tests
+- researcher - Multi-source research, best practices
+- tester - Test framework detection, coverage analysis
+- debugger - Root cause analysis, fix suggestions
+- **docs-manager** - Documentation generation and updates
+- **project-manager** - Project structure and organization
+- **ui-designer** - UI/UX design and component architecture
+- **performance-analyst** - Performance profiling and optimization
+
+**iOS agents (in cli/.claude/agents/):**
+- ios-developer, ios-tester, ios-debugger
+
+### Implemented Commands
+
+**Core commands:**
+- `/bootstrap` - Initialize new projects
+- `/cook` - Implement features (primary dev command)
+- `/plan` - Create implementation plans
+- `/test` - Run tests
+- `/debug` - Debug issues
+- `/ask` - Query codebase
+
+**Fix commands:**
+- `/fix:fast` - Quick fixes for simple bugs
+- `/fix:hard` - Complex bug fixes requiring investigation
+- `/fix:ci` - Fix CI/CD pipeline failures
+- `/fix:test` - Fix failing tests
+- `/fix:ui` - Fix UI bugs and visual issues
+
+**Design commands:**
+- `/design:fast` - Quick UI design implementation
+
+**Docs commands:**
+- `/docs:update` - Update existing documentation
+
+**Git commands:**
+- `/git:cm` - Stage and commit with conventional commits
 
 ## Testing ClaudeKit Changes
 

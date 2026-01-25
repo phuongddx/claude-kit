@@ -81,9 +81,24 @@ Preserves your local customizations while updating:
 
 The update process:
 1. Scans current `.claude/` directory
-2. Compares with latest kit files
-3. Syncs new/updated files (preserving local customizations)
-4. Updates metadata.json with new version
+2. Compares file hashes with latest kit files
+3. Creates automatic backup before updating
+4. Applies three-way merge for conflicting changes
+5. Syncs new/updated files (preserving local customizations)
+6. Updates metadata.json with new version
+
+### Advanced Update Options
+
+```bash
+# Preview changes before applying
+ck update . --dry-run
+
+# Rollback to previous version
+ck update . --rollback
+
+# Force update all files (use with caution)
+ck update . --force
+```
 
 ### `ck --version`
 
@@ -200,6 +215,100 @@ Best for:
 - Simple logic errors
 - Quick fixes (under 5 minutes)
 
+#### `/fix:hard [bug]`
+
+Complex bug fixes requiring investigation.
+
+```bash
+/fix:hard memory leak in WebSocket connection
+/fix:hard race condition in payment processing
+```
+
+Best for:
+- Complex issues requiring investigation
+- Multi-step fixes
+- Architecture-level problems
+- Issues needing thorough testing
+
+#### `/fix:ci [issue]`
+
+Fix CI/CD pipeline failures.
+
+```bash
+/fix:ci tests failing in GitHub Actions
+/fix:ci build error in production deployment
+```
+
+Best for:
+- CI/CD pipeline failures
+- Build configuration issues
+- Test environment problems
+- Deployment failures
+
+#### `/fix:test [test]`
+
+Fix failing tests.
+
+```bash
+/fix:test user authentication tests
+/fix:test integration test for API endpoints
+```
+
+Best for:
+- Test failures
+- Flaky tests
+- Test configuration issues
+- Coverage gaps
+
+#### `/fix:ui [issue]`
+
+Fix UI bugs and visual issues.
+
+```bash
+/fix:ui button alignment on mobile
+/fix:ui modal not closing properly
+```
+
+Best for:
+- CSS/styling issues
+- Layout problems
+- Accessibility issues
+- Visual bugs
+
+### Design Commands
+
+#### `/design:fast [description]`
+
+Quick UI design implementation.
+
+```bash
+/design:fast create a login form with email and password
+/design:fast add a card component for product display
+```
+
+Process:
+1. Creates UI component structure
+2. Applies styling conventions
+3. Ensures accessibility
+4. Integrates with existing design system
+
+### Docs Commands
+
+#### `/docs:update [what needs updating]`
+
+Update existing documentation to reflect code changes.
+
+```bash
+/docs:update API changes for user service
+/docs:update Add new component examples
+```
+
+Process:
+1. Identifies what changed in code
+2. Finds relevant documentation
+3. Updates docs to match
+4. Verifies examples still work
+
 ### Git Commands
 
 #### `/git:cm`
@@ -229,6 +338,10 @@ ClaudeKit includes specialized AI agents that work together:
 | **researcher** | Multi-source research for best practices |
 | **tester** | Write and validate tests |
 | **debugger** | Diagnose and fix issues |
+| **docs-manager** | Generate and update documentation |
+| **project-manager** | Manage project structure and organization |
+| **ui-designer** | Design UI components and layouts |
+| **performance-analyst** | Profile and optimize performance |
 
 ### Agent Workflow Example
 
@@ -499,16 +612,23 @@ Contributions are welcome! The project is organized into phases:
 
 | Phase | Component | Status |
 |-------|-----------|--------|
-| 1 | CLI Tool (`ck`) | Implemented |
-| 2 | AI Agents (5) | Implemented |
-| 3 | Commands (8) | Implemented |
+| 1 | CLI Tool (`ck`) | Implemented with update mechanism |
+| 2 | AI Agents (9) | Implemented |
+| 3 | Commands (15) | Implemented |
 | 4 | Skills (11) | Implemented |
 | 5 | Workflows & Config | Implemented |
 
-**Planned additions:**
-- 12 more agents (code-reviewer, git-manager, scout, etc.)
-- 58 more commands (fix:*, design:*, content:*, docs:*, etc.)
-- 39 more skills (ui-styling, threejs, devops, mcp-builder, etc.)
+**Implemented features:**
+- Version tracking with SHA256 file hashing
+- Rollback capability with automatic backups
+- Three-way merge conflict resolution
+- Dry-run mode for safe update preview
+- Pattern-based file preservation rules
+- Dynamic command registry
+- Skill indexing and activation
+- Agent coordination system
+- Error handling with structured errors
+- 52 passing unit and integration tests
 
 ## License
 
