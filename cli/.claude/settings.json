@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__xcodebuildmcp__*"
+    ]
+  },
+  "mcpServers": {
+    "XcodeBuildMCP": {
+      "command": "npx",
+      "args": ["-y", "xcodebuildmcp@latest"],
+      "env": {
+        "XCODEBUILDMCP_ENABLED_WORKFLOWS": "simulator,device,project-discovery,ui-testing,logging,doctor,swift-package"
+      }
+    }
+  }
+}

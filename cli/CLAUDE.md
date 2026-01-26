@@ -114,7 +114,23 @@ The `.claude/agents/` directory contains agent definitions for this CLI:
 - `planner.md` - Implementation planning
 - `researcher.md` - Research tasks
 - `tester.md` - Testing framework detection
-- iOS-specific agents: `ios-developer.md`, `ios-tester.md`, `ios-debugger.md`
+- `ios-developer.md` - Unified iOS development agent with XcodeBuildMCP integration
+
+### iOS Development Architecture
+
+The iOS agent has been unified from 3 separate agents into a single, comprehensive agent:
+
+**Before:** 3 separate agents (ios-developer, ios-tester, ios-debugger)
+**After:** 1 unified agent (ios-developer) with 3 specialized skills
+
+The unified `ios-developer` agent:
+- Handles all iOS development tasks (implementation, testing, debugging)
+- Integrates with XcodeBuildMCP for autonomous Xcode operations (83 MCP tools)
+- References specialized skills:
+  - `skills/ios-development/development.md` - Core iOS patterns
+  - `skills/ios-development/build.md` - Build systems and simulator management
+  - `skills/ios-development/tester.md` - Testing strategies
+- Works with or without XcodeBuildMCP (progressive enhancement)
 
 These are separate from kit template agents.
 
