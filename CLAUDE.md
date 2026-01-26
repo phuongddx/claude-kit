@@ -83,6 +83,8 @@ ck new [name] --force   # Force overwrite
 | Variable | Purpose | Default |
 |----------|---------|---------|
 | `CLAUDEKIT_PATH` | Path to kit directory | `./kits/default` |
+| `CLAUDEKIT_AGENT_STYLE` | Agent signature style | `text` |
+| `NO_COLOR` | Disable all colors | `false` |
 
 ## Key Implementation Details
 
@@ -198,6 +200,59 @@ Multi-agent orchestration patterns.
 - `settings.json` - Hooks, preferences
 - `settings.local.json` - Local overrides (gitignored)
 
+## Agent Signatures
+
+ClaudeKit agents include visual signatures to identify when a ClaudeKit agent is active. This helps distinguish ClaudeKit agents from other AI agents.
+
+### Signature Format
+
+Each agent outputs a signature footer at completion:
+
+```markdown
+---
+*[agent-name] is a ClaudeKit agent*
+```
+
+Example outputs:
+- `[planner]` - Planning agent
+- `[developer]` - Implementation agent
+- `[researcher]` - Research agent
+- `[tester]` - Testing agent
+- `[debugger]` - Debugging agent
+- `[reviewer]` - Code review agent
+- `[git]` - Git operations agent
+- `[docs]` - Documentation agent
+- `[design]` - UI/UX design agent
+- `[perf]` - Performance analysis agent
+- `[ios]` - iOS development agent
+
+### Signature Styles
+
+The `CLAUDEKIT_AGENT_STYLE` environment variable controls signature appearance:
+
+| Style | Output Example | Description |
+|-------|----------------|-------------|
+| `text` (default) | `[planner] Creating plan...` | Text prefix only |
+| `emoji` | `🧠 planner: Creating plan...` | Text + emoji badge |
+| `color` | `[planner]` (colored) | Text with ANSI color |
+| `full` | `🧠 [planner]` (colored) | Emoji + colored text |
+
+### Configuration
+
+```bash
+# Set signature style
+export CLAUDEKIT_AGENT_STYLE=emoji
+
+# Disable all colors
+export NO_COLOR=1
+```
+
+### Implementation
+
+- Utility: `cli/src/utils/agent-signature.ts`
+- Types: `cli/src/types/index.ts` (AgentSignatureConfig, FormatOptions)
+- Tests: `cli/src/utils/__tests__/agent-signature.test.ts`
+
 ## Update Mechanism
 
 ClaudeKit supports updating existing projects with new kit files while preserving local customizations.
@@ -265,6 +320,29 @@ ck update . --rollback
 
 **iOS agents (in cli/.claude/agents/):**
 - ios-developer, ios-tester, ios-debugger
+
+## Axiom iOS Skills Integration
+
+ClaudeKit integrates with external [Axiom](https://github.com/CharlesWiltgen/Axiom) skills for specialized iOS development.
+
+### UIKit Animation Debugging
+
+The ios-developer agent references `axiom-uikit-animation-debugging` for:
+- CAAnimation completion handler issues (handlers not firing, timing problems)
+- Animation duration mismatches (declared vs actual duration)
+- Spring physics differences between simulator and device
+- Gesture + animation synchronization causing jank
+- Device-specific animation behavior
+
+**Installation:**
+```bash
+/plugin install axiom@claude-code-plugins-plus
+```
+
+**Usage:**
+When debugging CAAnimation issues, the ios-developer agent automatically invokes the Axiom skill. No manual configuration required.
+
+**Documentation:** [Axiom UIKit Animation Debugging](https://github.com/CharlesWiltgen/Axiom/blob/main/.claude-plugin/plugins/axiom/skills/axiom-uikit-animation-debugging/SKILL.md)
 
 ### Implemented Commands
 

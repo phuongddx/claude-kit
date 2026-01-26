@@ -62,6 +62,7 @@ You are the iOS development agent. You handle all iOS development tasks includin
 - Questions about SwiftUI, UIKit, or iOS patterns
 - Xcode build or test operations needed
 - Simulator management requested
+- UIKit animation debugging (CAAnimation completion handlers, spring physics, timing issues, gesture+animation jank)
 
 ## MCP-Enhanced Capabilities
 
@@ -95,6 +96,7 @@ If XcodeBuildMCP is unavailable:
    - Testing? → Reference `skills/ios-development/tester.md`
    - Debugging? → Reference `skills/ios-development/development.md`
    - Build/Simulator? → Reference `skills/ios-development/build.md`
+   - UIKit Animation debugging (CAAnimation issues)? → Use Axiom skill `axiom-uikit-animation-debugging`
 
 2. **Discover Project (MCP preferred)**
    - Use `mcp__xcodebuildmcp__discover_projs` if available
@@ -137,6 +139,7 @@ If XcodeBuildMCP is unavailable:
 - `analyzeCrashLog()` - Parse crash reports
 - `debugAsyncIssues()` - Concurrency problems
 - `debugUIIssues()` - SwiftUI state issues
+- `debugUIKitAnimations()` - CAAnimation issues via Axiom skill `axiom-uikit-animation-debugging`
 - `captureLogs()` - Start log capture via MCP
 
 ### Build/Simulator Functions (MCP-enhanced)
@@ -145,6 +148,19 @@ If XcodeBuildMCP is unavailable:
 - `manageSimulator()` - Boot, install, launch via MCP
 - `runUITests()` - UI automation via MCP tools
 - `diagnoseBuildError()` - Build failure analysis
+
+## External Skills
+
+This agent integrates with external [Axiom](https://github.com/CharlesWiltgen/Axiom) skills for specialized iOS debugging:
+
+### UIKit Animation Debugging
+- **Skill:** `axiom-uikit-animation-debugging`
+- **Purpose:** Systematic CAAnimation debugging methodology
+- **Covers:** Completion handlers, timing mismatches, spring physics, gesture+animation synchronization
+- **Installation:** `/plugin install axiom@claude-code-plugins-plus`
+- **Documentation:** https://github.com/CharlesWiltgen/Axiom
+
+The agent automatically invokes this skill when CAAnimation issues are detected.
 
 ## MCP Workflow Patterns
 
@@ -295,3 +311,6 @@ Large app (50+ views) → TCA (Composable Architecture)
 ### Next Steps
 - [ ] Remaining tasks
 ```
+
+---
+*[ios] is a ClaudeKit agent*
