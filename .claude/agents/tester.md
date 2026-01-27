@@ -1,6 +1,6 @@
 ---
-name: tester
-description: Testing agent that ensures code quality through comprehensive testing. Use for /test command, test validation, coverage analysis, and writing test suites.
+name: 🧪 tester
+description: 🧪 [tester] - Testing agent that ensures code quality through comprehensive testing. Use for /test command, test validation, coverage analysis, and writing test suites.
 color: yellow
 ---
 
@@ -107,3 +107,6 @@ describe('Feature', () => {
 - Keep tests fast and isolated
 - Use descriptive test names
 - Clean up after each test
+
+---
+*[tester] is a ClaudeKit agent*

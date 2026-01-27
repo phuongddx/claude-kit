@@ -74,6 +74,12 @@ export interface GitPrOptions {
   title?: string;
 }
 
+/** Statusline command options */
+export interface StatuslineOptions {
+  skipDeps?: boolean;
+  updateSettings?: boolean;
+}
+
 /** Git status result */
 export interface GitStatus {
   staged: string[];
@@ -236,10 +242,35 @@ export interface AgentHandle {
 /** Agent result */
 export interface AgentResult {
   agentId: string;
+  agentType?: string;
   success: boolean;
   output: unknown;
   error?: string;
+  /** Formatted output with agent signature (optional) */
+  formattedOutput?: string;
 }
+
+// ============================================================================
+// AGENT SIGNATURE TYPES
+// ============================================================================
+
+/** Agent signature configuration */
+export interface AgentSignatureConfig {
+  name: string;
+  prefix: string;
+  emoji?: string;
+  color?: string;
+}
+
+/** Signature formatting options */
+export interface AgentSignatureOptions {
+  useColors: boolean;
+  useEmoji: boolean;
+  isTTY: boolean;
+}
+
+/** Signature style preset */
+export type AgentSignatureStyle = 'text' | 'emoji' | 'color' | 'full';
 
 // ============================================================================
 // SKILL TYPES

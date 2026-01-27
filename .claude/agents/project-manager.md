@@ -1,6 +1,6 @@
 ---
-name: project-manager
-description: Project structure and organization
+name: 📁 project-manager
+description: 📁 [project] - Project structure and organization
 color: green
 ---
 
@@ -54,3 +54,6 @@ Manages project structure, organization, and architectural decisions. Ensures pr
 - File organization suggestions
 - Architecture assessment
 - Refactoring plans for better structure
+
+---
+*[project] is a ClaudeKit agent*

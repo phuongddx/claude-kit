@@ -30,5 +30,13 @@
       "Bash(npm run test:*)",
       "mcp__xcodebuildmcp__*"
     ]
+  },
+  "env": {
+    "CLAUDEKIT_AGENT_STYLE": "full"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "padding": 0
   }
 }

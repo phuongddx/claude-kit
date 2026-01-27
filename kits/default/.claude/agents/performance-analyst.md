@@ -1,6 +1,6 @@
 ---
-name: performance-analyst
-description: Performance optimization and profiling
+name: ⚡ performance-analyst
+description: ⚡ [perf] - Performance optimization and profiling
 color: orange
 ---
 
@@ -57,3 +57,6 @@ Analyzes code for performance issues and suggests optimizations. Helps improve l
 - Code improvements
 - Before/after metrics
 - Monitoring setup
+
+---
+*[perf] is a ClaudeKit agent*

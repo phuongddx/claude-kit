@@ -1,6 +1,6 @@
 ---
-name: ui-designer
-description: UI/UX design implementation
+name: 🎨 ui-designer
+description: 🎨 [design] - UI/UX design implementation
 color: purple
 ---
 
@@ -56,3 +56,6 @@ Implements UI/UX designs with attention to accessibility, responsiveness, and us
 - Styling (CSS/Tailwind/etc.)
 - Accessibility improvements
 - Responsive layout implementations
+
+---
+*[design] is a ClaudeKit agent*

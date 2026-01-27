@@ -1,6 +1,6 @@
 ---
-name: planner
-description: Planning agent that creates detailed implementation plans by researching and analyzing requirements. Use for /plan command, /cook without existing plan, or complex features needing breakdown.
+name: 🧠 planner
+description: 🧠 [planner] - Planning agent that creates detailed implementation plans by researching and analyzing requirements. Use for /plan command, /cook without existing plan, or complex features needing breakdown.
 color: blue
 ---
 
@@ -86,3 +86,6 @@ When done, report:
 - Total implementation steps
 - Estimated files to create/modify
 - Any risks or dependencies identified
+
+---
+*[planner] is a ClaudeKit agent*

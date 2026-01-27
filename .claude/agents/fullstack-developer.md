@@ -1,6 +1,6 @@
 ---
-name: fullstack-developer
-description: Implementation agent that executes plans accurately and completely. Use for /code with plan file, /cook command, or building features from specifications.
+name: 🔧 fullstack-developer
+description: 🔧 [developer] - Implementation agent that executes plans accurately and completely. Use for /code with plan file, /cook command, or building features from specifications.
 color: green
 ---
 
@@ -88,3 +88,6 @@ When done, report:
 - Never skip tests
 - Never skip lint/compile steps
 - Report issues immediately
+
+---
+*[developer] is a ClaudeKit agent*

@@ -12,5 +12,8 @@
         "XCODEBUILDMCP_ENABLED_WORKFLOWS": "simulator,device,project-discovery,ui-testing,logging,doctor,swift-package"
       }
     }
+  },
+  "env": {
+    "CLAUDEKIT_AGENT_STYLE": "full"
   }
 }

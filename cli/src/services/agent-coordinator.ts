@@ -10,6 +10,12 @@ import type {
   AgentResult,
 } from '../types/index.js';
 import type { DiscoveredAgent } from './agent-registry.js';
+import {
+  formatSignature,
+  formatCompletionFooter,
+  detectOutputOptions,
+  type FormatOptions,
+} from '../utils/agent-signature.js';
 
 /**
  * Coordinator configuration.
@@ -21,6 +27,10 @@ export interface CoordinatorConfig {
   messageTimeout?: number;
   /** Enable message logging */
   enableLogging?: boolean;
+  /** Enable agent signatures in user-facing output */
+  enableSignatures?: boolean;
+  /** Signature formatting options (auto-detected if not provided) */
+  signatureOptions?: Partial<FormatOptions>;
 }
 
 /**
@@ -36,12 +46,19 @@ export class AgentCoordinator {
   private messageHandlers: Map<string, MessageHandler> = new Map();
   private messageQueue: AgentMessage[] = [];
   private messageHistory: AgentMessage[] = [];
+  private formatOptions: FormatOptions;
 
   constructor(config: CoordinatorConfig = {}) {
     this.config = {
       maxConcurrent: config.maxConcurrent ?? 5,
       messageTimeout: config.messageTimeout ?? 30000,
       enableLogging: config.enableLogging ?? false,
+      enableSignatures: config.enableSignatures ?? true,
+      signatureOptions: config.signatureOptions ?? {},
+    };
+    this.formatOptions = {
+      ...detectOutputOptions(),
+      ...this.config.signatureOptions,
     };
   }
 
@@ -149,15 +166,29 @@ export class AgentCoordinator {
 
             const response = await this.sendMessage(startMessage);
 
+            // Add signature footer to output if enabled and this is user-facing
+            let output = response.payload;
+            if (this.config.enableSignatures && typeof output === 'object' && output !== null) {
+              const footer = formatCompletionFooter(agentType, this.formatOptions);
+              if (footer) {
+                output = {
+                  ...output,
+                  _signature: footer,
+                };
+              }
+            }
+
             return {
               agentId: handle.id,
+              agentType,
               success: !response.payload || typeof response.payload !== 'object' ||
                 !('error' in response.payload),
-              output: response.payload,
+              output,
             };
           } catch (error) {
             return {
               agentId: agentType,
+              agentType,
               success: false,
               output: {},
               error: error instanceof Error ? error.message : String(error),
@@ -193,11 +224,24 @@ export class AgentCoordinator {
 
         const response = await this.sendMessage(message);
 
+        // Add signature footer to output if enabled and this is user-facing
+        let output = response.payload;
+        if (this.config.enableSignatures && typeof output === 'object' && output !== null) {
+          const footer = formatCompletionFooter(agentType, this.formatOptions);
+          if (footer) {
+            output = {
+              ...output,
+              _signature: footer,
+            };
+          }
+        }
+
         results.push({
           agentId: handle.id,
+          agentType,
           success: !response.payload || typeof response.payload !== 'object' ||
             !('error' in response.payload),
-          output: response.payload,
+          output,
         });
 
         // Pass output to next agent
@@ -208,6 +252,7 @@ export class AgentCoordinator {
       } catch (error) {
         results.push({
           agentId: agentType,
+          agentType,
           success: false,
           output: currentContext,
           error: error instanceof Error ? error.message : String(error),
@@ -258,7 +303,10 @@ export class AgentCoordinator {
    * Log a message (when enabled).
    */
   private logMessage(message: AgentMessage): void {
-    console.log(`[${message.timestamp}] ${message.from} -> ${message.to}: ${message.type}`);
+    const signature = this.config.enableSignatures
+      ? formatSignature(message.from, this.formatOptions)
+      : `[${message.from}]`;
+    console.log(`[${message.timestamp}] ${signature} -> ${message.to}: ${message.type}`);
   }
 
   /**

@@ -1,6 +1,6 @@
 ---
-name: git-manager
-description: Git workflow automation agent. Use for /git commands, commit message generation, branch management, and PR workflows.
+name: 📦 git-manager
+description: 📦 [git] - Git workflow automation agent. Use for /git commands, commit message generation, branch management, and PR workflows.
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: inherit
 color: purple
@@ -216,3 +216,6 @@ This agent integrates with:
 - Feature development workflow
 - Bug fixing workflow
 - Project init workflow
+
+---
+*[git] is a ClaudeKit agent*

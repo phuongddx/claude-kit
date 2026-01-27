@@ -7,6 +7,7 @@ import { versionCommand } from '../commands/version.js';
 import { gitCmCommand } from '../commands/git-commit.js';
 import { gitCpCommand } from '../commands/git-push.js';
 import { gitPrCommand } from '../commands/git-pr.js';
+import { statuslineCommand } from '../commands/statusline.js';
 import { resolveKitPath, resolveProjectRoot } from '../services/path-resolver.js';
 import { findCommandFile, getCommandMetadata, formatCommandDescription } from '../services/command-metadata.js';
 import { createCommandRegistry, type CommandRegistry } from './command-registry.js';
@@ -161,6 +162,14 @@ export function createCli() {
     .option('--title <title>', 'PR title')
     .action(async (path: string = '.', options: { base?: string; draft?: boolean; title?: string }) => {
       await gitPrCommand(path, options);
+    });
+
+  // Statusline command
+  cli.command('statusline [path]', 'Install and configure custom statusline for Claude Code')
+    .option('--skip-deps', 'Skip dependency validation')
+    .option('--no-update-settings', 'Skip updating settings.json')
+    .action(async (path: string = '.', options: { skipDeps?: boolean; updateSettings?: boolean }) => {
+      await statuslineCommand(path, options);
     });
 
   // Register dynamic commands from kit

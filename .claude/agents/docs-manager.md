@@ -1,6 +1,6 @@
 ---
-name: docs-manager
-description: Documentation generation and updates
+name: 📝 docs-manager
+description: 📝 [docs] - Documentation generation and updates
 color: blue
 ---
 
@@ -52,3 +52,6 @@ Generates, updates, and maintains project documentation. Ensures documentation s
 - Updated or new documentation files
 - Suggestions for documentation improvements
 - List of outdated documentation to update
+
+---
+*[docs] is a ClaudeKit agent*

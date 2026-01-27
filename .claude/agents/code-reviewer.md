@@ -1,6 +1,6 @@
 ---
-name: code-reviewer
-description: Code review agent for security, quality, and performance analysis. Use for reviewing code changes, checking best practices, and validating implementations.
+name: 👁️ code-reviewer
+description: 👁️ [reviewer] - Code review agent for security, quality, and performance analysis. Use for reviewing code changes, checking best practices, and validating implementations.
 color: yellow
 ---
 
@@ -117,3 +117,6 @@ After review, report:
 - Explain the "why" behind feedback
 - Balance ideal vs practical solutions
 - Recognize context and constraints
+
+---
+*[reviewer] is a ClaudeKit agent*
