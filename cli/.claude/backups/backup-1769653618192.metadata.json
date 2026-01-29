@@ -1,0 +1,42 @@
+{
+  "id": "backup-1769653618192",
+  "createdAt": "2026-01-29T02:26:58.228Z",
+  "files": [
+    {
+      "path": "settings.json",
+      "hash": "0484b7a458c8db1391b896ce43ed31cc4e0804553994961ca5c9084e4a3a85e8",
+      "version": "0484b7a4",
+      "modifiedAt": "2026-01-29T02:26:58.230Z"
+    },
+    {
+      "path": "metadata.json",
+      "hash": "d7757e8a1432546edd0520e2dec3fbbf9c009b8f721ea3e9837be9a2597f7f55",
+      "version": "d7757e8a",
+      "modifiedAt": "2026-01-29T02:26:58.230Z"
+    },
+    {
+      "path": "agents/ios-developer.md",
+      "hash": "c043b64dc5e8264bb523f4be2e9e5b10a914af1d10c04a0b9ea466db52dd3581",
+      "version": "c043b64d",
+      "modifiedAt": "2026-01-29T02:26:58.230Z"
+    },
+    {
+      "path": "skills/ios-development/build.md",
+      "hash": "686cb677e07988ba59a697da51c06bb50f7b3c4ca53eb26ef2e3c1788318cc05",
+      "version": "686cb677",
+      "modifiedAt": "2026-01-29T02:26:58.230Z"
+    },
+    {
+      "path": "skills/ios-development/tester.md",
+      "hash": "2e4f7ee0b739914f09421a70a5c3cd6ae8a39525ff2905960c17ef21b26320f8",
+      "version": "2e4f7ee0",
+      "modifiedAt": "2026-01-29T02:26:58.230Z"
+    },
+    {
+      "path": "skills/ios-development/development.md",
+      "hash": "5d0d83e34776ea535a4e46d0647781b1f767414586e441dcb5b57350d86ecf7d",
+      "version": "5d0d83e3",
+      "modifiedAt": "2026-01-29T02:26:58.230Z"
+    }
+  ]
+}

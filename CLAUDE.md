@@ -390,6 +390,58 @@ ls -la test-app/.claude/
 /git:cm
 ```
 
+## Development Workflow
+
+### Editing Agents, Commands, Skills
+
+This project uses its own toolkit for development ("dogfooding"). The root `.claude/` is an installed instance created via `ck init .`.
+
+**Architecture:**
+```
+claude-kit/
+├── .claude/                    # Root installed instance (for dogfooding)
+│   └── metadata.json           # Tracks as installed instance
+│
+├── cli/.claude/                # CLI installed instance (for CLI development)
+│   └── metadata.json           # Tracks as installed instance
+│   └── agents/
+│       └── ios-developer.md    # CLI-specific agent (NOT in template)
+│
+└── kits/default/               # Kit template (SOURCE OF TRUTH)
+    └── .claude/
+```
+
+**Workflow:**
+1. Edit files in `kits/default/.claude/` (template/source of truth)
+2. Run `./scripts/sync-kit.sh` to sync changes to both root and CLI
+3. Test changes work
+4. Commit all three locations (template, root, CLI)
+
+### CLI-Specific Workflow
+
+The CLI directory has its own `.claude/agents/` for dogfooding:
+
+**CLI-unique agents:**
+- `ios-developer.md` - iOS development (not in kit template, manually managed)
+
+**Shared agents (synced from template):**
+- All other agents in `cli/.claude/agents/` are synced from `kits/default/.claude/agents/`
+
+**Sync CLI agents only:**
+```bash
+cd cli && CLAUDEKIT_PATH=/Users/ddphuong/Projects/claude-kit/kits/default ck update .
+```
+
+**Add a new CLI-specific agent:**
+1. Create agent file in `cli/.claude/agents/[name].md`
+2. DO NOT add to kit template (CLI-specific only)
+
+**Why multiple copies?**
+- `kits/default/.claude/` = Template (what gets copied to new projects)
+- `.claude/` = Root installed instance (what this project uses)
+- `cli/.claude/` = CLI installed instance (what CLI uses for development)
+- Enables real-world testing of the toolkit
+
 ## Important Notes
 
 - Kit files are **copied**, not linked. Changes to `kits/default/` only affect new projects.

@@ -1,0 +1,354 @@
+{
+  "id": "backup-1769653771808",
+  "createdAt": "2026-01-29T02:29:31.880Z",
+  "files": [
+    {
+      "path": "settings.json",
+      "hash": "7467da2072900e9a0700f17862b1f1d852192b50b62ddfc4c08a581cb531db23",
+      "version": "7467da20",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "metadata.json",
+      "hash": "f4dacd3021a7a195dafc8e57fa110f2db1f3b1989e20f2ae74399850591dc2e8",
+      "version": "f4dacd30",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "workflows/bug-fixing.md",
+      "hash": "64bd0a3e114f7f72f7805e8c681921e5f7a736417a80212fc4797cf7025a7148",
+      "version": "64bd0a3e",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "workflows/project-init.md",
+      "hash": "a7894abe0c9e88afd98aa0b3d04d50975750cf56059183953ce6a12b101eac4f",
+      "version": "a7894abe",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "workflows/feature-development.md",
+      "hash": "81c4ddfd89c6703818df37d9c94feb3b0dd3aa9bea465c9dd32b96c7e5522897",
+      "version": "81c4ddfd",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/code-reviewer.md",
+      "hash": "c99d74bd96497710cd74306a57ef313132f6b3ddbdf62085084252d79b1a3dfa",
+      "version": "c99d74bd",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/ios-developer.md",
+      "hash": "c043b64dc5e8264bb523f4be2e9e5b10a914af1d10c04a0b9ea466db52dd3581",
+      "version": "c043b64d",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/debugger.md",
+      "hash": "51d7f9f126ccc8782d29f3b1b49ad7211dc1442968986fe4d0885b4e6943cdd3",
+      "version": "51d7f9f1",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/performance-analyst.md",
+      "hash": "fc476bbc783cb4abc219b9e359c072064b18bcb0647e546ee16f2736147ab1ac",
+      "version": "fc476bbc",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/researcher.md",
+      "hash": "1f3fa89a6bfe424f17758934146376b29564ebbb61c13131606db672f72b82ce",
+      "version": "1f3fa89a",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/project-manager.md",
+      "hash": "b2275bce59bdee95dd9ac9501801e18a5c79ed0c7dc573d6ff1944183a8b2ff7",
+      "version": "b2275bce",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/ui-designer.md",
+      "hash": "2b31f3ee4d427a4c1177bdf4ad354ef3861772779877f6a4f6e7d1e128d4ca3b",
+      "version": "2b31f3ee",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/tester.md",
+      "hash": "4ff1aeb5bd0909a87245a2455dd61c1c68d7e8b901362471eb785addd4103415",
+      "version": "4ff1aeb5",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/fullstack-developer.md",
+      "hash": "fc581d75036d8d667b3c022c9b2696cc8095686cd1204899832472a4ae9490f1",
+      "version": "fc581d75",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/planner.md",
+      "hash": "e5eacef267a93dee1e210fd7d308883147a9891948be28faf1ec0b8f292e75ce",
+      "version": "e5eacef2",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/docs-manager.md",
+      "hash": "816a408b6a8d95ef022f16e35a04c6259b9123d18f748c0dc54ce3b0128ba225",
+      "version": "816a408b",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "agents/git-manager.md",
+      "hash": "5c1a6e298877cd1eb0e92fa667b2060ada2b9727d1bca9dc0b1229bf1f36e342",
+      "version": "5c1a6e29",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/design/fast.md",
+      "hash": "92c4870841144d28b55f92ffe446c3277e2de96bef9d45ae37e6cc6d12321357",
+      "version": "92c48708",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/core/debug.md",
+      "hash": "0339eed809b3b20beece2a4be7a271800a8d0b885a93beba3d5482a7467622ee",
+      "version": "0339eed8",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/core/cook.md",
+      "hash": "39f77616bcf3105d92cb46e4777631eba94a8c30f1296b9ef94572ae4f2c5142",
+      "version": "39f77616",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/core/bootstrap.md",
+      "hash": "409af5f0c33050997076cc41888138d9b6c366d4d6fa6d7df5773c2f96b103f4",
+      "version": "409af5f0",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/core/plan.md",
+      "hash": "80a49a4301b1e03347470cd5052633fc9df73918be9b1c0678466758fed5d2e6",
+      "version": "80a49a43",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/core/test.md",
+      "hash": "0d309e88c9a367689ab78714f4b38cc6da576d40eebcff162da3c95a4ee5a947",
+      "version": "0d309e88",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/core/ask.md",
+      "hash": "331c779ee321bb151b7fda6981a7095c8933f462225c0d7dec9d7f1ddb1f4943",
+      "version": "331c779e",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/claude/debug.md",
+      "hash": "050c79ea1ab6ad146cfcaf351f99589ed6d3a6f5f85f70b1345833851a80fb9c",
+      "version": "050c79ea",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/docs/init.md",
+      "hash": "9c52c5343c5d44f2d3be69b032f72bd02849a5f955405fabde5d66b1b8fd4765",
+      "version": "9c52c534",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/docs/update.md",
+      "hash": "a56d54903712a70a1e68d819968c68c14a3dcdfb4f7496eed5c54ab7051921f3",
+      "version": "a56d5490",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/ios/debug.md",
+      "hash": "be598ca9f05931f2e69199f734712837d3cbeabebafb6b018b57c07af3e7b681",
+      "version": "be598ca9",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/ios/simulator.md",
+      "hash": "34e86bdfc3acff03c4dd357d1a8c79fd0b7215d2165971087fe231cc39eb0eb4",
+      "version": "34e86bdf",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/ios/cook.md",
+      "hash": "6fa1e62d7c19a1fbaea46a30c552460190f7c9e5398a5b5a00e983bd7cbb87a1",
+      "version": "6fa1e62d",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/ios/test.md",
+      "hash": "eafca016857242693395842220ee38e84b577b13e969be25d4af8d42ce65fdf6",
+      "version": "eafca016",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/fix/hard.md",
+      "hash": "cecc07d12ff614d107bf1d432ef13c6ea07309571414e922096c8dec06dfef7f",
+      "version": "cecc07d1",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/fix/fast.md",
+      "hash": "c80e509f6b7f8ddc8bfb882894aedab7f3c4d903f779eba9bf29b221407dab64",
+      "version": "c80e509f",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/fix/test.md",
+      "hash": "6b14906443bf654f3584bef14660d39f567b4ba9e60e5b97f6696ba9fba4d205",
+      "version": "6b149064",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/fix/ci.md",
+      "hash": "25bf2b6e8690615b32a537565c24ebbced51e2698f85df0164e4c56e6ea74a97",
+      "version": "25bf2b6e",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/fix/ui.md",
+      "hash": "f1eda628cbad8ce9f561c39bc8243c72d9609cc5a780ae0e53eec0d20dceeac9",
+      "version": "f1eda628",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/ck/new.md",
+      "hash": "eb626092e379bb9b278c74014253e1d1b0f78529af35ec10785a870213252f43",
+      "version": "eb626092",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/ck/init.md",
+      "hash": "b606f5d072db74324c2bd008dc7915a05f1397ff8a5b71309b3918a78076fd49",
+      "version": "b606f5d0",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/ck/update.md",
+      "hash": "a7748bea38979e8310d65a15f8bafde35b3684b1ee794862fe43dd33b684ffa5",
+      "version": "a7748bea",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/git/pr.md",
+      "hash": "9a4288e20874ff894f536905fcf0d14ad8392d32ed31d8fa0c3bf24300e0fc11",
+      "version": "9a4288e2",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/git/push.md",
+      "hash": "132a56b9487e67cd4c3dc32be4a037a8f35587f2b4eafb22c1b3d51bce6be90a",
+      "version": "132a56b9",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/git/commit.md",
+      "hash": "edb2aa474da7be040637be27da9f3193c08060784269938788ee08ded5beca41",
+      "version": "edb2aa47",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/git/cp.md",
+      "hash": "1a955c34e0fe67d511533bbd74cbf730f37fa56292877bec0ef6319377a6cf14",
+      "version": "1a955c34",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "commands/git/cm.md",
+      "hash": "d523455ec595a9cdccce81a6a9d09fdbd635cbaa0c2e5b098f26ad7bcf1407e7",
+      "version": "d523455e",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/research/SKILL.md",
+      "hash": "f8ef9870e9f36ff427cd0fb0716ffcfd7da0072ba92d96f1c0d784d6c9f72c97",
+      "version": "f8ef9870",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/backend-development/SKILL.md",
+      "hash": "4d704313d008f4cf774b350bdf1f923900746e1af3c32b43ed057592015c8ee7",
+      "version": "4d704313",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/databases/SKILL.md",
+      "hash": "f36e1950fa99900b1be9f3bbd3b7cc4815e6e14a347b6be73464396859b9dbc0",
+      "version": "f36e1950",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/docker/SKILL.md",
+      "hash": "8284552c0fa164345868440588c4971c2160df2e2e018c0db3c2a217e59dd53c",
+      "version": "8284552c",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/shadcn-ui/SKILL.md",
+      "hash": "90752df4a5ab98041695702a1ec736b1bcdf8c4e07611ed5dbad9007054107ab",
+      "version": "90752df4",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/frontend-development/SKILL.md",
+      "hash": "167daa962ca9853d4e06093e297d5fa51d8e07be89e6ed9d96e7fa8320db8e7c",
+      "version": "167daa96",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/debugging/SKILL.md",
+      "hash": "2ca560a81e540c3f0bcc51e47094b3e4e324e7b1a639e308869db0e6ea3064ca",
+      "version": "2ca560a8",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/planning/SKILL.md",
+      "hash": "d25e8c361383285ad72e3b7247b54cff92d0c6d343278b33e8abf982912b5edc",
+      "version": "d25e8c36",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/nextjs/SKILL.md",
+      "hash": "2720cb86e4738d5ca14d257eec2baac406f92724d920f84bed47fb15604e13a1",
+      "version": "2720cb86",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/better-auth/SKILL.md",
+      "hash": "abb3a5f6a92dcf0287c274941b48189068196fa8657d750ced81f539304d88cc",
+      "version": "abb3a5f6",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/ios-development/build.md",
+      "hash": "686cb677e07988ba59a697da51c06bb50f7b3c4ca53eb26ef2e3c1788318cc05",
+      "version": "686cb677",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/ios-development/SKILL.md",
+      "hash": "ad7ce7f60e6c2bbc86f790eefa5287710907afc2715ae27fe101bc9d7ae8a77d",
+      "version": "ad7ce7f6",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/ios-development/tester.md",
+      "hash": "2e4f7ee0b739914f09421a70a5c3cd6ae8a39525ff2905960c17ef21b26320f8",
+      "version": "2e4f7ee0",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    },
+    {
+      "path": "skills/ios-development/development.md",
+      "hash": "5d0d83e34776ea535a4e46d0647781b1f767414586e441dcb5b57350d86ecf7d",
+      "version": "5d0d83e3",
+      "modifiedAt": "2026-01-29T02:29:31.884Z"
+    }
+  ]
+}
