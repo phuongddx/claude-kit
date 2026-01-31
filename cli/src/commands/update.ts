@@ -6,7 +6,6 @@ import { directoryExists } from '../services/file-operations/scanner.js';
 import { logger } from '../shared/logger.js';
 import type { UpdateOptions } from '../types/index.js';
 import { createVersionTracker } from '../domains/versioning/tracker.js';
-import { createRollbackManager } from '../domains/versioning/rollback.js';
 
 /**
  * Update existing project with latest kit files
@@ -75,16 +74,6 @@ export async function updateCommand(targetPath: string = '.', options: UpdateOpt
       return;
     }
 
-    // Create backup before update (unless disabled)
-    let backupId: string | undefined;
-    if (options.backup !== false) {
-      const s = p.spinner();
-      s.start('Creating backup...');
-      const tracker = createVersionTracker({ projectPath: absolutePath });
-      backupId = await tracker.createBackup();
-      s.stop(`Backup created: ${backupId}`);
-    }
-
     const s = p.spinner();
     s.start('Updating kit files...');
 
@@ -109,11 +98,6 @@ export async function updateCommand(targetPath: string = '.', options: UpdateOpt
     }
     if (result.skipped.length > 0) {
       logger.info(`Skipped ${result.skipped.length} preserved file(s)`);
-    }
-
-    if (backupId) {
-      logger.info(`Backup ID: ${backupId}`);
-      logger.info(`To rollback: ck rollback ${backupId}`);
     }
 
     p.outro('Update complete!');
