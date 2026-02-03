@@ -54,4 +54,5 @@ Generates, updates, and maintains project documentation. Ensures documentation s
 - List of outdated documentation to update
 
 ---
-*[docs] is a ClaudeKit agent*
+
+_[docs] is a ClaudeKit agent_
