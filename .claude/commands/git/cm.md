@@ -1,7 +1,7 @@
 ---
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git diff:*), Bash(git log:*)
 argument-hint: [message] | --no-verify | --amend
-description: Create well-formatted commits with conventional commit format and emoji
+description: ✨ - Create well-formatted commits with conventional commit format and emoji
 ---
 
 # Smart Git Commit
@@ -34,7 +34,7 @@ Create well-formatted commit: $ARGUMENTS
 - **Verify before committing**: Ensure code is linted, builds correctly, and documentation is updated
 - **Atomic commits**: Each commit should contain related changes that serve a single purpose
 - **Split large changes**: If changes touch multiple concerns, split them into separate commits
-- **Conventional commit format**: Use the format <type>: <description> where type is one of:
+- **Conventional commit format**: Use the format `<type>`: `<description>` where type is one of:
   - feat: A new feature
   - fix: A bug fix
   - docs: Documentation changes
