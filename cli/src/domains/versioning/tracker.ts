@@ -6,7 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import type { FileVersion, FileChangeDetection, BackupMetadata } from '../../types/index.js';
+import type { FileVersion, FileChangeDetection } from '../../types/index.js';
 import type { KitMetadata } from '../../types/index.js';
 
 /**
@@ -15,8 +15,6 @@ import type { KitMetadata } from '../../types/index.js';
 export interface VersionTrackerConfig {
   /** Project root path */
   projectPath: string;
-  /** Backup directory path */
-  backupDir?: string;
 }
 
 /**
@@ -27,15 +25,13 @@ export interface FileChange extends FileVersion {
 }
 
 /**
- * Version tracker for file change detection and backup.
+ * Version tracker for file change detection.
  */
 export class VersionTracker {
   private config: VersionTrackerConfig;
-  private backupDir: string;
 
   constructor(config: VersionTrackerConfig) {
     this.config = config;
-    this.backupDir = config.backupDir || path.join(config.projectPath, '.claude', 'backups');
   }
 
   /**
@@ -114,82 +110,6 @@ export class VersionTracker {
   }
 
   /**
-   * Create a backup of current files.
-   */
-  async createBackup(): Promise<string> {
-    const backupId = `backup-${Date.now()}`;
-    const backupPath = path.join(this.backupDir, backupId);
-
-    // Ensure backup directory exists
-    fs.mkdirSync(backupPath, { recursive: true });
-
-    const claudeDir = path.join(this.config.projectPath, '.claude');
-    if (!fs.existsSync(claudeDir)) {
-      return backupId;
-    }
-
-    // Copy all files to backup
-    const copyDir = (srcPath: string, destPath: string) => {
-      if (!fs.existsSync(srcPath)) {
-        return;
-      }
-
-      fs.mkdirSync(destPath, { recursive: true });
-      const entries = fs.readdirSync(srcPath, { withFileTypes: true });
-
-      for (const entry of entries) {
-        // Skip backups directory to avoid infinite recursion
-        if (entry.isDirectory() && entry.name === 'backups') {
-          continue;
-        }
-
-        const srcFullPath = path.join(srcPath, entry.name);
-        const destFullPath = path.join(destPath, entry.name);
-
-        if (entry.isDirectory()) {
-          copyDir(srcFullPath, destFullPath);
-        } else if (entry.isFile()) {
-          fs.copyFileSync(srcFullPath, destFullPath);
-        }
-      }
-    };
-
-    copyDir(claudeDir, backupPath);
-
-    // Create backup metadata
-    const metadata: BackupMetadata = {
-      id: backupId,
-      createdAt: new Date().toISOString(),
-      files: this.getFileVersions(),
-    };
-
-    const metadataPath = path.join(this.backupDir, `${backupId}.metadata.json`);
-    fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
-
-    return backupId;
-  }
-
-  /**
-   * Get current file versions.
-   */
-  private getFileVersions(): FileVersion[] {
-    const versions: FileVersion[] = [];
-    const hashes = this.scanCurrentFiles();
-    const now = new Date().toISOString();
-
-    for (const [filePath, hash] of Object.entries(hashes)) {
-      versions.push({
-        path: filePath,
-        hash,
-        version: this.getFileVersion(hash),
-        modifiedAt: now,
-      });
-    }
-
-    return versions;
-  }
-
-  /**
    * Generate a short version string from a hash.
    */
   private getFileVersion(hash: string): string {
@@ -248,72 +168,6 @@ export class VersionTracker {
     // Save metadata
     const metadataPath = path.join(this.config.projectPath, '.claude', 'metadata.json');
     fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
-  }
-
-  /**
-   * List all available backups.
-   */
-  listBackups(): BackupMetadata[] {
-    if (!fs.existsSync(this.backupDir)) {
-      return [];
-    }
-
-    const backups: BackupMetadata[] = [];
-    const entries = fs.readdirSync(this.backupDir, { withFileTypes: true });
-
-    for (const entry of entries) {
-      if (entry.isFile() && entry.name.endsWith('.metadata.json')) {
-        const metadataPath = path.join(this.backupDir, entry.name);
-        try {
-          const content = fs.readFileSync(metadataPath, 'utf-8');
-          backups.push(JSON.parse(content) as BackupMetadata);
-        } catch {
-          // Skip invalid metadata files
-        }
-      }
-    }
-
-    return backups.sort((a, b) =>
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
-  }
-
-  /**
-   * Get backup metadata by ID.
-   */
-  getBackup(backupId: string): BackupMetadata | null {
-    const metadataPath = path.join(this.backupDir, `${backupId}.metadata.json`);
-
-    if (!fs.existsSync(metadataPath)) {
-      return null;
-    }
-
-    try {
-      const content = fs.readFileSync(metadataPath, 'utf-8');
-      return JSON.parse(content) as BackupMetadata;
-    } catch {
-      return null;
-    }
-  }
-
-  /**
-   * Delete a backup.
-   */
-  deleteBackup(backupId: string): boolean {
-    const backupPath = path.join(this.backupDir, backupId);
-    const metadataPath = path.join(this.backupDir, `${backupId}.metadata.json`);
-
-    try {
-      if (fs.existsSync(backupPath)) {
-        fs.rmSync(backupPath, { recursive: true, force: true });
-      }
-      if (fs.existsSync(metadataPath)) {
-        fs.unlinkSync(metadataPath);
-      }
-      return true;
-    } catch {
-      return false;
-    }
   }
 }
 

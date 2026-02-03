@@ -32,22 +32,6 @@ describe('VersionTracker', () => {
     });
   });
 
-  describe('listBackups', () => {
-    it('should return empty array when no backups exist', () => {
-      const backups = tracker.listBackups();
-
-      expect(backups).toEqual([]);
-    });
-  });
-
-  describe('getBackup', () => {
-    it('should return null for non-existent backup', () => {
-      const backup = tracker.getBackup('nonexistent');
-
-      expect(backup).toBeNull();
-    });
-  });
-
   describe('updateFileVersions', () => {
     it('should handle non-existent project gracefully', () => {
       // Should handle error for non-existent project

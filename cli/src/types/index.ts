@@ -12,7 +12,6 @@ export interface UpdateHistoryEntry {
   fromVersion: string;
   toVersion: string;
   filesChanged: number;
-  backupId?: string;
 }
 
 /** Kit metadata stored in project */
@@ -52,7 +51,6 @@ export interface NewOptions {
 export interface UpdateOptions {
   force?: boolean;
   dryRun?: boolean;
-  backup?: boolean;
 }
 
 /** Git commit command options */
@@ -157,7 +155,7 @@ export interface ValidationResult {
 export type PreserveRuleType = 'exact' | 'glob' | 'directory';
 
 /** File preservation strategy */
-export type PreserveStrategy = 'keep' | 'merge' | 'backup';
+export type PreserveStrategy = 'keep' | 'merge';
 
 /** File preservation rule */
 export interface PreserveRule {
@@ -172,13 +170,6 @@ export interface FileChangeDetection {
   modified: string[];
   deleted: string[];
   unchanged: string[];
-}
-
-/** Backup metadata */
-export interface BackupMetadata {
-  id: string;
-  createdAt: string;
-  files: FileVersion[];
 }
 
 // ============================================================================

@@ -129,9 +129,8 @@ export function createCli() {
   cli.command('update [path]', getCommandDescription('update', 'Update existing project with latest kit files'))
     .option('-f, --force', 'Force overwrite preserved files')
     .option('--dry-run', 'Preview changes without applying them')
-    .option('--no-backup', 'Skip creating backup before update')
-    .action(async (path: string = '.', options: { force?: boolean; dryRun?: boolean; backup?: boolean }) => {
-      await updateCommand(path, { force: options.force, dryRun: options.dryRun, backup: options.backup });
+    .action(async (path: string = '.', options: { force?: boolean; dryRun?: boolean }) => {
+      await updateCommand(path, { force: options.force, dryRun: options.dryRun });
     });
 
   // Git commit command
