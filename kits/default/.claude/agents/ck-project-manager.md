@@ -1,5 +1,5 @@
 ---
-name: 📁 project-manager
+name: ck-project-manager
 description: 📁 [project] - Project structure and organization
 color: green
 ---

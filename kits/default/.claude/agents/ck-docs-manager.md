@@ -1,5 +1,5 @@
 ---
-name: 📝 docs-manager
+name: ck-docs-manager
 description: 📝 [docs] - Documentation generation and updates
 color: blue
 ---

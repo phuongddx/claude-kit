@@ -1,5 +1,5 @@
 ---
-name: 🎨 ui-designer
+name: ck-ui-designer
 description: 🎨 [design] - UI/UX design implementation
 color: purple
 ---

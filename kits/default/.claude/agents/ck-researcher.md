@@ -1,5 +1,5 @@
 ---
-name: 🔍 researcher
+name: ck-researcher
 description: 🔍 [researcher] - Research agent that finds and validates information from multiple sources. Use for documentation lookup, best practices investigation, validating technical approaches, and multi-source research.
 color: purple
 ---

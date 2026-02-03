@@ -1,5 +1,5 @@
 ---
-name: 🧪 tester
+name: ck-tester
 description: 🧪 [tester] - Testing agent that ensures code quality through comprehensive testing. Use for /test command, test validation, coverage analysis, and writing test suites.
 color: yellow
 ---

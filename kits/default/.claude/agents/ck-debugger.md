@@ -1,5 +1,5 @@
 ---
-name: 🐛 debugger
+name: ck-debugger
 description: 🐛 [debugger] - Debugging agent that finds root causes and explains issues clearly. Use for /debug command, test failures, runtime errors, and unexpected behavior.
 color: red
 ---

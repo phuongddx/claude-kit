@@ -1,5 +1,5 @@
 ---
-name: 🔧 fullstack-developer
+name: ck-fullstack-developer
 description: 🔧 [developer] - Implementation agent that executes plans accurately and completely. Use for /code with plan file, /cook command, or building features from specifications.
 color: green
 ---

@@ -1,5 +1,5 @@
 ---
-name: ⚡ performance-analyst
+name: ck-performance-analyst
 description: ⚡ [perf] - Performance optimization and profiling
 color: orange
 ---
